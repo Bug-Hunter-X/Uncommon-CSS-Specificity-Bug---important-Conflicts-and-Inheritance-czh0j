@@ -1,0 +1,27 @@
+The following CSS code snippet exhibits an uncommon issue related to specificity and inheritance:
+
+```css
+.parent {
+  color: blue;
+}
+
+.child {
+  color: red !important;
+}
+
+.child.exception {
+  color: green;
+}
+
+.parent .child {
+  color: purple;
+}
+
+.parent .child.exception {
+  color: yellow !important;
+}
+```
+
+The `!important` declaration on `.child` and `.parent .child.exception` can lead to unexpected behavior and makes the CSS harder to maintain.  The specificity rules are overridden by `!important`, but the order in which rules are declared can still influence the outcome in unexpected ways.  The final color of `.child.exception` might not always be yellow as `!important` is used in two conflicting declarations. 
+
+The issue is subtle and might not immediately be apparent, highlighting the problems of overusing `!important`.
